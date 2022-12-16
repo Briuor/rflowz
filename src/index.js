@@ -1,6 +1,6 @@
-import React from 'react'
-import styles from './styles.module.css'
+import Canvas from './Canvas'
+import { useCanvasStore } from './store'
 
-export const ExampleComponent = ({ text }) => {
-  return <div className={styles.test}>Example Component: {text}</div>
-}
+export const { updateNode, addNode, deleteNode } = useCanvasStore
+
+export default Canvas
