@@ -1,29 +1,55 @@
-import React from 'react'
-
-import Canvas, { addNode } from 'rflow'
+import React, {useEffect} from 'react'
+import RFlow, { useNodesState } from 'rflow'
 import 'rflow/dist/index.css'
 
+const CustomNode = ({ node }) => {
+  return (
+    <div style={{ color: 'purple' }}>
+      {node.data.name}
+      <button>test</button>
+    </div>
+  )
+}
+
+const CustomNode2 = ({ node }) => {
+  return (
+    <div style={{ color: 'pink', background: 'black' }}>
+      <button>test</button>
+      {node.data.name}
+    </div>
+  )
+}
+
 const App = () => {
-  const initialNodes = [
-    {
-      id: 1,
-      label: 'asdasd kjh hjkgjhg node',
-      nextNodeIds: [2],
-      x: 100,
-      y: 100
-    },
-    {
-      id: 2,
-      label: 'asdasd node',
-      nextNodeIds: [],
-      x: 300,
-      y: 100
-    }
-  ]
+  const [nodes, setNodes] = useNodesState([]);
+
+  useEffect(() => {
+    setNodes([
+      {
+        id: '1',
+        x: 100,
+        y: 200,
+        component: CustomNode2,
+        data: {
+          name: 'Bruno'
+        },
+        nextNodeIds: ['2'],
+      },
+      {
+        id: '2',
+        x: 500,
+        y: 100,
+        component: CustomNode,
+        data: {
+          name: 'Bruno'
+        },
+      }
+    ])
+  }, [setNodes])
 
   return (
     <div style={{ width: 500, height: 300 }}>
-      <Canvas nodes={initialNodes} />
+      <RFlow nodes={nodes}  />
     </div>
   )
 }

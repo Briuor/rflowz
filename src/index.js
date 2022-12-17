@@ -1,6 +1,4 @@
-import Canvas from './Canvas'
-import { useCanvasStore } from './store'
+import RFlow from './RFlow'
+export { useNodesState } from './hooks/useNodesState'
 
-export const { updateNode, addNode, deleteNode } = useCanvasStore
-
-export default Canvas
+export default RFlow

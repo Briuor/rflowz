@@ -3,7 +3,7 @@ import Node from './Node'
 import { useCanvasStore } from './store'
 import styles from './styles.module.css'
 
-export function Canvas(props) {
+export function RFlow(props) {
   const nodes = useCanvasStore((state) => state.nodes)
   const updateNode = useCanvasStore((state) => state.updateNode)
 
@@ -24,7 +24,6 @@ export function Canvas(props) {
   )
 
   const selectedItem = useCanvasStore((state) => state.selectedItem)
-  const setSelectedItem = useCanvasStore((state) => state.setSelectedItem)
 
   const setNodes = useCanvasStore((state) => state.setNodes)
 
@@ -41,7 +40,6 @@ export function Canvas(props) {
   const mouseUpHandler = () => {
     setHangingPos(null)
     setCurrentDraggingNode(null)
-    setSelectedItem(null)
   }
 
   const mouseDownHandler = (e) => {
@@ -113,7 +111,6 @@ export function Canvas(props) {
     if (selectedItem && e.key === 'Delete') {
       deleteNode(selectedItem?.id)
       setCurrentDraggingNode(null)
-      setSelectedItem(null)
     }
   }
 
@@ -148,4 +145,4 @@ export function Canvas(props) {
   )
 }
 
-export default Canvas
+export default RFlow

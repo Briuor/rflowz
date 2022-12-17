@@ -1,6 +1,6 @@
 {
   "name": "rflow",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Made with create-react-library",
   "author": "Briuor",
   "license": "MIT",
@@ -53,6 +53,7 @@
     "dist"
   ],
   "dependencies": {
+    "immer": "^9.0.16",
     "zustand": "^4.1.1"
   }
 }
