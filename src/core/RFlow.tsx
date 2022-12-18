@@ -1,37 +1,30 @@
 import React, { useEffect, useRef } from 'react'
 import Node from './Node'
-import { useCanvasStore } from './store'
+import { useCanvasStore } from '../store'
 import styles from './styles.module.css';
+import { canvasProperties, Node as NodeType, RFlowProps, RFlowState } from '../types';
 
-export function RFlow(props: any) {
-  const nodes = useCanvasStore((state: any) => state.nodes)
-  const updateNode = useCanvasStore((state: any) => state.updateNode)
-
-  const hangingPos = useCanvasStore((state: any) => state.hangingPos)
-  const setHangingPos = useCanvasStore((state: any) => state.setHangingPos)
-
+export default function RFlow(props: RFlowProps) {
+  const nodes = useCanvasStore((state: RFlowState) => state.nodes)
+  const updateNode = useCanvasStore((state: RFlowState) => state.updateNode)
+  const hangingPos = useCanvasStore((state: RFlowState) => state.hangingPos)
+  const setHangingPos = useCanvasStore((state: RFlowState) => state.setHangingPos)
   const canvasProperties = useCanvasStore(
-    (state: any) => state.canvasProperties
+    (state: RFlowState) => state.canvasProperties
   )
   const setCanvasProperties = useCanvasStore(
-    (state: any) => state.setCanvasProperties
+    (state: RFlowState) => state.setCanvasProperties
   )
-
-  const nodeMouseOffset = useCanvasStore((state: any) => state.nodeMouseOffset)
+  const nodeMouseOffset = useCanvasStore((state: RFlowState) => state.nodeMouseOffset)
   const currentDraggingNode = useCanvasStore(
-    (state: any) => state.currentDraggingNode
+    (state: RFlowState) => state.currentDraggingNode
   )
   const setCurrentDraggingNode = useCanvasStore(
-    (state: any) => state.setCurrentDraggingNode
+    (state: RFlowState) => state.setCurrentDraggingNode
   )
+  const setNodes = useCanvasStore((state: RFlowState) => state.setNodes)
 
-  const selectedItem = useCanvasStore((state: any) => state.selectedItem)
-
-  const setNodes = useCanvasStore((state: any) => state.setNodes)
-
-  const deleteNode = useCanvasStore((state: any) => state.deleteNode)
-
-  const canvasRef = useRef<any>(null)
+  const canvasRef = useRef<HTMLDivElement>(null)
 
   // initialize nodes
   useEffect(() => {
@@ -44,7 +37,7 @@ export function RFlow(props: any) {
     setCurrentDraggingNode(null)
   }
 
-  const mouseDownHandler = (e: any) => {
+  const mouseDownHandler = (e: React.MouseEvent) => {
     // store mouse position when start dragging canvas
     setHangingPos({
       x: e.clientX - canvasProperties.tx,
@@ -52,12 +45,18 @@ export function RFlow(props: any) {
     })
   }
 
-  const transformCanvas = (newCanvasProperties: any) => {
+  const transformCanvas = (newCanvasProperties: canvasProperties) => {
+    if(!canvasRef.current)
+    return;
+
     canvasRef.current.style.transform = `translate(${newCanvasProperties.tx}px, ${newCanvasProperties.ty}px) scale(${newCanvasProperties.scale})`
     setCanvasProperties(newCanvasProperties)
   }
 
-  const mouseMoveHandler = (e: any) => {
+  const mouseMoveHandler = (e: React.MouseEvent) => {
+    if(!canvasRef.current || !nodeMouseOffset)
+      return;
+
     const canvasInitialPos = canvasRef.current.getBoundingClientRect()
     // handle drag node
     if (currentDraggingNode) {
@@ -84,7 +83,10 @@ export function RFlow(props: any) {
     }
   }
 
-  const zoomHandler = (e: any) => {
+  const zoomHandler = (e: React.WheelEvent) => {
+    if(!canvasRef.current)
+      return;
+
     const factor = 1.1
     const center = {
       x: e.clientX - canvasRef.current.offsetWidth / 2,
@@ -109,13 +111,6 @@ export function RFlow(props: any) {
     transformCanvas(newCanvasProperties)
   }
 
-  const keyDownHandler = (e: any) => {
-    if (selectedItem && e.key === 'Delete') {
-      deleteNode(selectedItem?.id)
-      setCurrentDraggingNode(null)
-    }
-  }
-
   return (
     <div className={styles.rootContainer}>
       <div
@@ -123,18 +118,16 @@ export function RFlow(props: any) {
         onMouseMove={mouseMoveHandler}
         onMouseDown={mouseDownHandler}
         onWheel={zoomHandler}
-        onKeyDown={keyDownHandler}
         className={styles.container}
       >
         <div className={styles.canvas} id='canvas' ref={canvasRef}>
           {nodes
-            ? nodes.map((node: any) => {
+            ? nodes.map((node: NodeType) => {
                 return (
                   <Node
                     key={node.id}
                     node={node}
                     canvasRef={canvasRef}
-                    text={node.text}
                   />
                 )
               })
@@ -145,5 +138,3 @@ export function RFlow(props: any) {
     </div>
   )
 }
-
-export default RFlow

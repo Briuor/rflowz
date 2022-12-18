@@ -6,7 +6,6 @@
     "plugin:prettier/recommended",
     "prettier/standard",
     "prettier/react",
-    "eslint:recommended",
     "plugin:@typescript-eslint/recommended"
   ],
   "env": {

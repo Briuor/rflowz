@@ -1,42 +1,47 @@
 import React, { useEffect, useRef } from 'react'
-import { useCanvasStore } from './store'
+import { useCanvasStore } from '../store'
 import Arrow from './Arrow'
-import styles from './styles.module.css';
+import styles from './styles.module.css'
+import { NodeID, NodeProps, RFlowState } from '../types'
 
-const Node = ({ node, canvasRef }: any) => {
-  const nodeRef = useRef<any>(null)
+export default function Node({ node, canvasRef }: NodeProps) {
+  const nodeRef = useRef<HTMLDivElement>(null)
 
   const setNodeMouseOffset = useCanvasStore(
-    (state: any) => state.setNodeMouseOffset
+    (state: RFlowState) => state.setNodeMouseOffset
   )
   const currentDraggingNode = useCanvasStore(
-    (state: any) => state.currentDraggingNode
+    (state: RFlowState) => state.currentDraggingNode
   )
   const setCurrentDraggingNode = useCanvasStore(
-    (state: any) => state.setCurrentDraggingNode
+    (state: RFlowState) => state.setCurrentDraggingNode
   )
   const canvasProperties = useCanvasStore(
-    (state: any) => state.canvasProperties
+    (state: RFlowState) => state.canvasProperties
   )
-  const updateNode = useCanvasStore((state: any) => state.updateNode)
+  const updateNode = useCanvasStore((state: RFlowState) => state.updateNode)
 
   // change cursor when dragging node
   useEffect(() => {
-    nodeRef.current.style.cursor = currentDraggingNode ? 'grabbing' : 'pointer'
+    if(nodeRef.current) {
+      nodeRef.current.style.cursor = currentDraggingNode ? 'grabbing' : 'pointer'
+    }
   }, [currentDraggingNode])
 
   // initialize node width and height
   useEffect(() => {
-    if (nodeRef.current) {
-      updateNode(node.id, {
-        w: nodeRef.current.offsetWidth,
-        h: nodeRef.current.offsetHeight
+    if (!nodeRef.current) return ;
+    
+    updateNode(node.id, {
+      w: nodeRef.current.offsetWidth,
+      h: nodeRef.current.offsetHeight
       })
-    }
   }, [nodeRef.current, node.id, updateNode])
 
   // start dragging node
-  const mouseDownHandler = (e: any) => {
+  const mouseDownHandler = (e: React.MouseEvent) => {
+    if(!canvasRef.current) return ;
+    
     const canvasInitialPos = canvasRef.current.getBoundingClientRect()
     setNodeMouseOffset({
       x: e.clientX - (canvasInitialPos.x + node.x * canvasProperties.scale),
@@ -46,7 +51,7 @@ const Node = ({ node, canvasRef }: any) => {
     setCurrentDraggingNode(node)
   }
 
-  const Element = node.component
+  const NodeComponent = node.component
 
   return (
     <React.Fragment>
@@ -58,16 +63,13 @@ const Node = ({ node, canvasRef }: any) => {
         style={{
           top: node.y,
           left: node.x,
-          ...node.style
         }}
       >
-        {node.component ? <Element node={node} /> : <span>{node.label}</span>}
+        <NodeComponent node={node} />
       </div>
-      {node.nextNodeIds?.map((nextNodeId: any) => (
+      {node.nextNodeIds?.map((nextNodeId: NodeID) => (
         <Arrow node={node} key={nextNodeId} nextNodeId={nextNodeId} />
       ))}
     </React.Fragment>
   )
 }
-
-export default Node

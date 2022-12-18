@@ -1,26 +1,22 @@
 import React, { useEffect, useState, useMemo } from 'react'
-import { useCanvasStore } from './store'
+import { useCanvasStore } from '../store'
 import styles from './styles.module.css';
+import { ArrowProps, RFlowState, Node } from '../types';
 
-export default function Arrow({ node, nextNodeId }: any) {
-  const nodes = useCanvasStore((state: any) => state.nodes)
-  const currentArrowRef = useCanvasStore((state: any) => state.currentArrowRef)
+export default function Arrow({ node, nextNodeId }: ArrowProps) {
+  const nodes = useCanvasStore((state: RFlowState) => state.nodes)
 
-  const [nextNode, setNextNode] = useState(null)
+  const [nextNode, setNextNode] = useState<Node | null>(null)
 
   useEffect(() => {
-    setNextNode(nodes.find((n: any) => n.id === nextNodeId) || null)
+    setNextNode(nodes.find((n: Node) => n.id === nextNodeId) || null)
   }, [nodes, nextNodeId])
 
   const getDPath = useMemo(() => {
     const n1 = node
-    let n2: any = { x: 0, y: 0, w: 0, h: 0 }
+    let n2 = nextNode
 
-    if (currentArrowRef && currentArrowRef.node.id === node.id) {
-      n2 = { ...currentArrowRef, w: 0, h: 0 }
-    } else if (nextNode) {
-      n2 = nextNode
-    }
+    if(!n1 || !n1.w || !n1.h || !n2 || !n2.w || !n2.h) return '';
 
     let d1 = `${n1.x + n1.w} ${n1.y + n1.h / 2}`
     let d2 = `${n1.x + (n2.x + n2.w - n1.x) / 2} ${n1.y + n1.h / 2}`
@@ -63,17 +59,13 @@ export default function Arrow({ node, nextNodeId }: any) {
     }
 
     return `M ${d1} L ${d2} L ${d3} L ${d4}`
-  }, [node, nextNode, currentArrowRef])
+  }, [node, nextNode])
 
   const getTransform = useMemo(() => {
     const n1 = node
-    let n2: any = { x: 0, y: 0, w: 0, h: 0 }
+    let n2 = nextNode
 
-    if (currentArrowRef && currentArrowRef.node.id === node.id) {
-      n2 = { ...currentArrowRef, w: 0, h: 0 }
-    } else if (nextNode) {
-      n2 = nextNode
-    }
+    if(!n1 || !n1.w || !n1.h || !n2 || !n2.w || !n2.h) return ''
 
     if (
       (n1.y + n1.h > n2.y && n2.x < n1.x + n1.w && n2.x + n2.w > n1.x) ||
@@ -91,7 +83,7 @@ export default function Arrow({ node, nextNodeId }: any) {
     if (n2.x < n1.x) {
       return `translate(${n2.x + n2.w + 12},${n2.y + n2.h / 2 + 6}) rotate(180)`
     }
-  }, [node, nextNode, currentArrowRef])
+  }, [node, nextNode])
 
   return nextNode ? (
     <svg className={styles.line}>
@@ -100,13 +92,10 @@ export default function Arrow({ node, nextNodeId }: any) {
         style={{ pointerEvents: 'visibleStroke' }}
         fill='none'
         stroke='#3B4252'
-        // onClick={selectArrow}
         strokeWidth='2'
       />
       <g
         style={{ pointerEvents: 'visibleFill' }}
-        // onClick={selectArrow}
-        // onMouseDown={mouseDownHandler}
         transform={getTransform}
       >
         <path d='M 0 0 L 12 6 L 0 12 L 3 6 z' fill='#3B4252' />
