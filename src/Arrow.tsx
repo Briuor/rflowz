@@ -1,20 +1,20 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { useCanvasStore } from './store'
-import styles from './styles.module.css'
+import styles from './styles.module.css';
 
-export default function Arrow({ node, nextNodeId }) {
-  const nodes = useCanvasStore((state) => state.nodes)
-  const currentArrowRef = useCanvasStore((state) => state.currentArrowRef)
+export default function Arrow({ node, nextNodeId }: any) {
+  const nodes = useCanvasStore((state: any) => state.nodes)
+  const currentArrowRef = useCanvasStore((state: any) => state.currentArrowRef)
 
   const [nextNode, setNextNode] = useState(null)
 
   useEffect(() => {
-    setNextNode(nodes.find((n) => n.id === nextNodeId) || null)
+    setNextNode(nodes.find((n: any) => n.id === nextNodeId) || null)
   }, [nodes, nextNodeId])
 
   const getDPath = useMemo(() => {
     const n1 = node
-    let n2 = {}
+    let n2: any = { x: 0, y: 0, w: 0, h: 0 }
 
     if (currentArrowRef && currentArrowRef.node.id === node.id) {
       n2 = { ...currentArrowRef, w: 0, h: 0 }
@@ -67,7 +67,7 @@ export default function Arrow({ node, nextNodeId }) {
 
   const getTransform = useMemo(() => {
     const n1 = node
-    let n2 = {}
+    let n2: any = { x: 0, y: 0, w: 0, h: 0 }
 
     if (currentArrowRef && currentArrowRef.node.id === node.id) {
       n2 = { ...currentArrowRef, w: 0, h: 0 }
@@ -97,7 +97,7 @@ export default function Arrow({ node, nextNodeId }) {
     <svg className={styles.line}>
       <path
         d={getDPath}
-        style={{ pointerEvents: 'visiblestroke' }}
+        style={{ pointerEvents: 'visibleStroke' }}
         fill='none'
         stroke='#3B4252'
         // onClick={selectArrow}

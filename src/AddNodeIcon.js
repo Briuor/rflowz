@@ -1,7 +1,7 @@
 import React from 'react'
 import NewNodeIcon from 'newnode.png'
 import { useCanvasStore } from './store'
-import styles from './styles.module.css'
+const styles = require('./styles.module.css')
 
 export default function AddNodeIcon({ node, nodeRef }) {
   const selectedItem = useCanvasStore((state) => state.selectedItem)

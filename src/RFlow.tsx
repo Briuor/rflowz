@@ -1,35 +1,37 @@
 import React, { useEffect, useRef } from 'react'
 import Node from './Node'
 import { useCanvasStore } from './store'
-import styles from './styles.module.css'
+import styles from './styles.module.css';
 
-export function RFlow(props) {
-  const nodes = useCanvasStore((state) => state.nodes)
-  const updateNode = useCanvasStore((state) => state.updateNode)
+export function RFlow(props: any) {
+  const nodes = useCanvasStore((state: any) => state.nodes)
+  const updateNode = useCanvasStore((state: any) => state.updateNode)
 
-  const hangingPos = useCanvasStore((state) => state.hangingPos)
-  const setHangingPos = useCanvasStore((state) => state.setHangingPos)
+  const hangingPos = useCanvasStore((state: any) => state.hangingPos)
+  const setHangingPos = useCanvasStore((state: any) => state.setHangingPos)
 
-  const canvasProperties = useCanvasStore((state) => state.canvasProperties)
+  const canvasProperties = useCanvasStore(
+    (state: any) => state.canvasProperties
+  )
   const setCanvasProperties = useCanvasStore(
-    (state) => state.setCanvasProperties
+    (state: any) => state.setCanvasProperties
   )
 
-  const nodeMouseOffset = useCanvasStore((state) => state.nodeMouseOffset)
+  const nodeMouseOffset = useCanvasStore((state: any) => state.nodeMouseOffset)
   const currentDraggingNode = useCanvasStore(
-    (state) => state.currentDraggingNode
+    (state: any) => state.currentDraggingNode
   )
   const setCurrentDraggingNode = useCanvasStore(
-    (state) => state.setCurrentDraggingNode
+    (state: any) => state.setCurrentDraggingNode
   )
 
-  const selectedItem = useCanvasStore((state) => state.selectedItem)
+  const selectedItem = useCanvasStore((state: any) => state.selectedItem)
 
-  const setNodes = useCanvasStore((state) => state.setNodes)
+  const setNodes = useCanvasStore((state: any) => state.setNodes)
 
-  const deleteNode = useCanvasStore((state) => state.deleteNode)
+  const deleteNode = useCanvasStore((state: any) => state.deleteNode)
 
-  const canvasRef = useRef(null)
+  const canvasRef = useRef<any>(null)
 
   // initialize nodes
   useEffect(() => {
@@ -42,7 +44,7 @@ export function RFlow(props) {
     setCurrentDraggingNode(null)
   }
 
-  const mouseDownHandler = (e) => {
+  const mouseDownHandler = (e: any) => {
     // store mouse position when start dragging canvas
     setHangingPos({
       x: e.clientX - canvasProperties.tx,
@@ -50,12 +52,12 @@ export function RFlow(props) {
     })
   }
 
-  const transformCanvas = (newCanvasProperties) => {
+  const transformCanvas = (newCanvasProperties: any) => {
     canvasRef.current.style.transform = `translate(${newCanvasProperties.tx}px, ${newCanvasProperties.ty}px) scale(${newCanvasProperties.scale})`
     setCanvasProperties(newCanvasProperties)
   }
 
-  const mouseMoveHandler = (e) => {
+  const mouseMoveHandler = (e: any) => {
     const canvasInitialPos = canvasRef.current.getBoundingClientRect()
     // handle drag node
     if (currentDraggingNode) {
@@ -82,14 +84,14 @@ export function RFlow(props) {
     }
   }
 
-  const zoomHandler = (e) => {
+  const zoomHandler = (e: any) => {
     const factor = 1.1
     const center = {
       x: e.clientX - canvasRef.current.offsetWidth / 2,
       y: e.clientY - canvasRef.current.offsetHeight / 2
     }
     const { tx, ty, scale } = canvasProperties
-    const newCanvasProperties = {}
+    const newCanvasProperties = { scale: 0, tx: 0, ty: 0 }
 
     // calculate new scale
     if (e.deltaY * -1 > 0) {
@@ -107,7 +109,7 @@ export function RFlow(props) {
     transformCanvas(newCanvasProperties)
   }
 
-  const keyDownHandler = (e) => {
+  const keyDownHandler = (e: any) => {
     if (selectedItem && e.key === 'Delete') {
       deleteNode(selectedItem?.id)
       setCurrentDraggingNode(null)
@@ -117,7 +119,6 @@ export function RFlow(props) {
   return (
     <div className={styles.rootContainer}>
       <div
-        tabIndex='0'
         onMouseUp={mouseUpHandler}
         onMouseMove={mouseMoveHandler}
         onMouseDown={mouseDownHandler}
@@ -127,7 +128,7 @@ export function RFlow(props) {
       >
         <div className={styles.canvas} id='canvas' ref={canvasRef}>
           {nodes
-            ? nodes.map((node) => {
+            ? nodes.map((node: any) => {
                 return (
                   <Node
                     key={node.id}

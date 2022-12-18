@@ -1,20 +1,24 @@
 import React, { useEffect, useRef } from 'react'
 import { useCanvasStore } from './store'
-import styles from './styles.module.css'
 import Arrow from './Arrow'
+import styles from './styles.module.css';
 
-const Node = ({ node, canvasRef }) => {
-  const nodeRef = useRef(null)
+const Node = ({ node, canvasRef }: any) => {
+  const nodeRef = useRef<any>(null)
 
-  const setNodeMouseOffset = useCanvasStore((state) => state.setNodeMouseOffset)
+  const setNodeMouseOffset = useCanvasStore(
+    (state: any) => state.setNodeMouseOffset
+  )
   const currentDraggingNode = useCanvasStore(
-    (state) => state.currentDraggingNode
+    (state: any) => state.currentDraggingNode
   )
   const setCurrentDraggingNode = useCanvasStore(
-    (state) => state.setCurrentDraggingNode
+    (state: any) => state.setCurrentDraggingNode
   )
-  const canvasProperties = useCanvasStore((state) => state.canvasProperties)
-  const updateNode = useCanvasStore((state) => state.updateNode)
+  const canvasProperties = useCanvasStore(
+    (state: any) => state.canvasProperties
+  )
+  const updateNode = useCanvasStore((state: any) => state.updateNode)
 
   // change cursor when dragging node
   useEffect(() => {
@@ -32,7 +36,7 @@ const Node = ({ node, canvasRef }) => {
   }, [nodeRef.current, node.id, updateNode])
 
   // start dragging node
-  const mouseDownHandler = (e) => {
+  const mouseDownHandler = (e: any) => {
     const canvasInitialPos = canvasRef.current.getBoundingClientRect()
     setNodeMouseOffset({
       x: e.clientX - (canvasInitialPos.x + node.x * canvasProperties.scale),
@@ -59,7 +63,7 @@ const Node = ({ node, canvasRef }) => {
       >
         {node.component ? <Element node={node} /> : <span>{node.label}</span>}
       </div>
-      {node.nextNodeIds?.map((nextNodeId) => (
+      {node.nextNodeIds?.map((nextNodeId: any) => (
         <Arrow node={node} key={nextNodeId} nextNodeId={nextNodeId} />
       ))}
     </React.Fragment>

@@ -3,20 +3,20 @@ import produce from 'immer'
 import { devtools } from 'zustand/middleware'
 
 const useCanvasStore = create(
-  devtools((set, get) => ({
+  devtools((set, get: any) => ({
     hangingPos: null,
     canvasProperties: { tx: 0, ty: 0, scale: 1 },
     nodeMouseOffset: null,
     currentDraggingNode: null,
     selectedItem: null,
     nodes: [],
-    addNode: (nodeId, newNodeData) => {
-      const nodeIndex = get().nodes.findIndex((n) => n.id === nodeId)
+    addNode: (nodeId: any, newNodeData: any) => {
+      const nodeIndex = get().nodes.findIndex((n: any) => n.id === nodeId)
 
       let newNode
 
       set(
-        produce((state) => {
+        produce((state: any) => {
           const newId = Math.round(Math.random() * 9999)
           state.nodes[nodeIndex].nextNodeIds.push(newId)
           newNode = {
@@ -27,33 +27,33 @@ const useCanvasStore = create(
         })
       )
     },
-    updateNode: (nodeId, data) => {
-      const nodeIndex = get().nodes.findIndex((n) => n.id === nodeId)
+    updateNode: (nodeId: any, data: any) => {
+      const nodeIndex = get().nodes.findIndex((n: any) => n.id === nodeId)
 
       if (nodeIndex !== -1) {
         set(
-          produce((state) => {
+          produce((state: any) => {
             state.nodes[nodeIndex] = { ...state.nodes[nodeIndex], ...data }
           })
         )
       }
     },
-    deleteNode: (nodeId) => {
+    deleteNode: (nodeId: any) => {
       const state = get()
       if (state.nodes.length > 1) {
-        const nodeIndex = state.nodes.findIndex((n) => n.id === nodeId)
+        const nodeIndex = state.nodes.findIndex((n: any) => n.id === nodeId)
         set(
-          produce((state) => {
+          produce((state: any) => {
             state.nodes.splice(nodeIndex, 1)
           })
         )
       }
     },
-    setNodes: (nodes) => set({ nodes }),
-    setCanvasProperties: (canvasProperties) => set({ canvasProperties }),
-    setHangingPos: (hangingPos) => set({ hangingPos }),
-    setNodeMouseOffset: (offset) => set({ nodeMouseOffset: offset }),
-    setCurrentDraggingNode: (item) => set({ currentDraggingNode: item })
+    setNodes: (nodes: any) => set({ nodes }),
+    setCanvasProperties: (canvasProperties: any) => set({ canvasProperties }),
+    setHangingPos: (hangingPos: any) => set({ hangingPos }),
+    setNodeMouseOffset: (offset: any) => set({ nodeMouseOffset: offset }),
+    setCurrentDraggingNode: (item: any) => set({ currentDraggingNode: item })
   }))
 )
 
