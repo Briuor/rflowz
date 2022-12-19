@@ -30,7 +30,6 @@
 
 .rootContainer {
   height: 100%;
-  background: #d8dee9;
   position: relative;
   overflow: hidden;
 }
@@ -39,11 +38,8 @@
   position: absolute;
   top: 0px;
   left: 0px;
-  border-radius: 2px;
-  box-shadow: 0px 2p x 5px 0px rgba(0, 0, 0, 0.17);
-  user-select: none;
   text-align: center;
-  z-index: 1000;
+  z-index: 99;
   pointer-events: all;
   min-width: max-content;
   width: max-content;
@@ -51,47 +47,6 @@
 
 .node:hover {
   cursor: pointer;
-}
-
-.nodeInput {
-  border: none;
-  z-index: -1;
-  cursor: inherit;
-  background: #f5f5f5;
-  user-select: none;
-}
-
-.wrapper {
-  display: grid;
-}
-
-.wrapper::after {
-  content: attr(data-replicated-value) ' ';
-  white-space: pre-wrap;
-  visibility: hidden;
-}
-
-.wrapper > textarea {
-  /* You could leave this, but after a user resizes, then it ruins the auto sizing */
-  resize: none;
-  /* Firefox shows scrollbar on growth, you can hide like this. */
-  overflow: hidden;
-  text-align: center;
-}
-
-.wrapper > textarea,
-.wrapper::after {
-  /* Identical styling required!! */
-  word-break: break-all;
-  grid-area: 1 / 1 / 2 / 2;
-}
-
-.plusIcon {
-  background: #f5f5f5;
-  padding: 8px;
-  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.17);
-  position: absolute;
-  border-radius: 50%;
 }
 
 .line {

@@ -35,8 +35,8 @@ export default function Node({ node, canvasRef }: NodeProps) {
     updateNode(node.id, {
       w: nodeRef.current.offsetWidth,
       h: nodeRef.current.offsetHeight
-      })
-  }, [nodeRef.current, node.id, updateNode])
+    })
+  }, [nodeRef.current, node.id, node.w, node.h, updateNode])
 
   // start dragging node
   const mouseDownHandler = (e: React.MouseEvent) => {

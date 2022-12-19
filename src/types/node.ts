@@ -9,7 +9,8 @@ export interface Node {
     w?: number,
     h?: number,
     component: new() => React.Component<any, any>,
-    nextNodeIds: NodeID[]
+    data?: any,
+    nextNodeIds?: NodeID[]
 }
 
 export interface NodeProps {

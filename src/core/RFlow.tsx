@@ -54,7 +54,7 @@ export default function RFlow(props: RFlowProps) {
   }
 
   const mouseMoveHandler = (e: React.MouseEvent) => {
-    if(!canvasRef.current || !nodeMouseOffset)
+    if(!canvasRef.current)
       return;
 
     const canvasInitialPos = canvasRef.current.getBoundingClientRect()

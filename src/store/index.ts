@@ -6,7 +6,7 @@ const useCanvasStore = create<RFlowState>(
   (set, get) => ({
     nodes: [],
     hangingPos: null,
-    nodeMouseOffset: null,
+    nodeMouseOffset: { x:0, y: 0 },
     canvasProperties: { tx: 0, ty: 0, scale: 1 },
     currentDraggingNode: null,
     // addNode: (nodeId: any, newNodeData: any) => {

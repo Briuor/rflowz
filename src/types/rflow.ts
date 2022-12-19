@@ -14,7 +14,7 @@ export type canvasProperties = {
 export type RFlowState = {
     nodes: Node[],
     hangingPos: Position | null,
-    nodeMouseOffset: Position | null,
+    nodeMouseOffset: Position,
     canvasProperties: canvasProperties,
     currentDraggingNode: Node | null,
     updateNode: (nodeId: NodeID, data: any) => void,
