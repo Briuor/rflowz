@@ -65,7 +65,7 @@ export default function Node({ node, canvasRef }: NodeProps) {
           left: node.x,
         }}
       >
-        <NodeComponent node={node} />
+        <NodeComponent data={node.data} />
       </div>
       {node.nextNodeIds?.map((nextNodeId: NodeID) => (
         <Arrow node={node} key={nextNodeId} nextNodeId={nextNodeId} />

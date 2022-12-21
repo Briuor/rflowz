@@ -29,7 +29,7 @@ export default function RFlow(props: RFlowProps) {
   // initialize nodes
   useEffect(() => {
     setNodes(props.nodes)
-  }, [props.nodes, setNodes])
+  }, [])
 
   // reset mouse position and current dragging node when stop dragging canvas
   const mouseUpHandler = () => {
@@ -120,7 +120,7 @@ export default function RFlow(props: RFlowProps) {
         onWheel={zoomHandler}
         className={styles.container}
       >
-        <div className={styles.canvas} id='canvas' ref={canvasRef}>
+        <div className={styles.canvas} ref={canvasRef}>
           {nodes
             ? nodes.map((node: NodeType) => {
                 return (
@@ -133,7 +133,7 @@ export default function RFlow(props: RFlowProps) {
               })
             : null}
         </div>
-        <div id='canvasControl' className={styles.canvasControl} />
+        <div className={styles.canvasControl} />
       </div>
     </div>
   )

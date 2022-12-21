@@ -91,14 +91,14 @@ export default function Arrow({ node, nextNodeId }: ArrowProps) {
         d={getDPath}
         style={{ pointerEvents: 'visibleStroke' }}
         fill='none'
-        stroke='#3B4252'
+        stroke={node?.arrowColor || '#000'}
         strokeWidth='2'
       />
       <g
         style={{ pointerEvents: 'visibleFill' }}
         transform={getTransform}
       >
-        <path d='M 0 0 L 12 6 L 0 12 L 3 6 z' fill='#3B4252' />
+        <path d='M 0 0 L 12 6 L 0 12 L 3 6 z' fill={node?.arrowColor || '#000'} />
       </g>
     </svg>
   ) : null

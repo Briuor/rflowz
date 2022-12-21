@@ -10,7 +10,8 @@ export interface Node {
     h?: number,
     component: new() => React.Component<any, any>,
     data?: any,
-    nextNodeIds?: NodeID[]
+    nextNodeIds?: NodeID[],
+    arrowColor?: string
 }
 
 export interface NodeProps {

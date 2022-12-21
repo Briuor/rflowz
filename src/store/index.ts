@@ -9,23 +9,6 @@ const useCanvasStore = create<RFlowState>(
     nodeMouseOffset: { x:0, y: 0 },
     canvasProperties: { tx: 0, ty: 0, scale: 1 },
     currentDraggingNode: null,
-    // addNode: (nodeId: any, newNodeData: any) => {
-    //   const nodeIndex = get().nodes.findIndex((n: any) => n.id === nodeId)
-
-    //   let newNode
-
-    //   set(
-    //     produce((state: any) => {
-    //       const newId = Math.round(Math.random() * 9999)
-    //       state.nodes[nodeIndex].nextNodeIds.push(newId)
-    //       newNode = {
-    //         id: newId,
-    //         ...newNodeData
-    //       }
-    //       state.nodes.push(newNode)
-    //     })
-    //   )
-    // },
     updateNode: (nodeId, data) => {
       const nodeIndex = get().nodes.findIndex((n: Node) => n.id === nodeId)
 
@@ -37,18 +20,15 @@ const useCanvasStore = create<RFlowState>(
         )
       }
     },
-    // deleteNode: (nodeId: any) => {
-    //   const state = get()
-    //   if (state.nodes.length > 1) {
-    //     const nodeIndex = state.nodes.findIndex((n: any) => n.id === nodeId)
-    //     set(
-    //       produce((state: any) => {
-    //         state.nodes.splice(nodeIndex, 1)
-    //       })
-    //     )
-    //   }
-    // },
-    setNodes: (nodes) => set({ nodes }),
+    setNodes: (nodesOrCallback) => {
+      if(Array.isArray(nodesOrCallback)) {
+        set({ nodes: nodesOrCallback })
+      } else if(typeof nodesOrCallback === 'function') {
+        set((state: RFlowState) => ({ nodes: nodesOrCallback(state.nodes) }));
+      } else {
+        console.error('Wrong nodes type');
+      }
+    },
     setCanvasProperties: (canvasProperties) => set({ canvasProperties }),
     setHangingPos: (hangingPos) => set({ hangingPos }),
     setNodeMouseOffset: (offset) => set({ nodeMouseOffset: offset }),

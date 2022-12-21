@@ -11,6 +11,8 @@ export type canvasProperties = {
     scale: number
 }
 
+export type setNodeCallback = (prev: Node[]) => Node[]
+
 export type RFlowState = {
     nodes: Node[],
     hangingPos: Position | null,
@@ -18,7 +20,7 @@ export type RFlowState = {
     canvasProperties: canvasProperties,
     currentDraggingNode: Node | null,
     updateNode: (nodeId: NodeID, data: any) => void,
-    setNodes: (nodes: Node[]) => void,
+    setNodes: (nodesOrCallback: Node[] | setNodeCallback) => void | Node,
     setCanvasProperties: (canvasProperties: canvasProperties) => void,
     setHangingPos: (hangingPos: Position | null) => void,
     setNodeMouseOffset: (offset: Position) => void,
