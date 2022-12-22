@@ -1,6 +1,6 @@
 {
   "name": "rflowz",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Library for building flow chart and diagrams using React",
   "author": "Briuor",
   "license": "MIT",
@@ -11,6 +11,18 @@
   "engines": {
     "node": ">=10"
   },
+  "keywords": [
+    "react",
+    "react-flow",
+    "react-diagram",
+    "flow",
+    "diagram",
+    "workflow",
+    "typescript",
+    "flowchart",
+    "react-library",
+    "graph"
+  ],
   "scripts": {
     "build": "tsc && microbundle-crl --no-compress --format modern,cjs",
     "start": "tsc && microbundle-crl watch --no-compress --format modern,cjs",
