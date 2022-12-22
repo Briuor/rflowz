@@ -1,6 +1,6 @@
 import React from 'react';
-import RFlow, { useNodeState } from 'rflow';
-import 'rflow/dist/index.css';
+import RFlowz, { useNodeState } from 'rflowz';
+import 'rflowz/dist/index.css';
 
 const DefaultNode = ({ data }) => <div className='node'>{data.label} Node</div>;
 
@@ -27,7 +27,7 @@ export default function SimpleExample() {
 
   return (
     <div style={{ width: '100%', height: '100vh' }}>
-      <RFlow nodes={nodes} />
+      <RFlowz nodes={nodes} />
     </div>
   );
 }

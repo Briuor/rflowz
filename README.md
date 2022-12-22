@@ -1,25 +1,25 @@
-# rflow
+# rflowz
 
 > Library for building flow chart and diagrams using React
 
-[![NPM](https://img.shields.io/npm/v/rflow.svg)](https://www.npmjs.com/package/rflow) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/rflowz.svg)](https://www.npmjs.com/package/rflowz) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 
 ```bash
-npm install rflow
+npm install rflowz
 ```
 
 ## Usage
 ### Basic Usage
 <p align="center"> 
-  <img style="border-radius: 5px" src="https://github.com/Briuor/rflow/blob/master/media/demo-rflow.gif?raw=true">
+  <img style="border-radius: 5px" src="https://github.com/Briuor/rflowz/blob/master/media/demo-rflowz.gif?raw=true">
 </p>
 
 ```jsx
 import React from 'react';
-import RFlow, { useNodeState } from 'rflow';
-import 'rflow/dist/index.css';
+import RFlowz, { useNodeState } from 'rflowz';
+import 'rflowz/dist/index.css';
 
 const DefaultNode = ({ data }) => <div className='node'>{data.labelPrefix} Node</div>;
 
@@ -45,20 +45,20 @@ export default function App() {
 
   return (
     <div style={{ width: '100%', height: '100vh' }}>
-      <RFlow nodes={nodes} />
+      <RFlowz nodes={nodes} />
     </div>
   );
 }
 ```
 ### Passing Events to Node Component
 <p align="center"> 
-  <img style="border-radius: 5px" src="https://github.com/Briuor/rflow/blob/master/media/demo-event-rflow.gif?raw=true">
+  <img style="border-radius: 5px" src="https://github.com/Briuor/rflowz/blob/master/media/demo-event-rflowz.gif?raw=true">
 </p>
 
 ```jsx
 import React, { useEffect } from 'react';
-import RFlow, { useNodeState } from 'rflow';
-import 'rflow/dist/index.css';
+import RFlowz, { useNodeState } from 'rflowz';
+import 'rflowz/dist/index.css';
 
 const StartNode = ({ data }) => (
   <div className='node'>
@@ -126,7 +126,7 @@ export default function EventExample() {
 
   return (
     <div style={{ width: '100%', height: '100vh' }}>
-      <RFlow nodes={nodes} />
+      <RFlowz nodes={nodes} />
     </div>
   );
 }
@@ -134,11 +134,11 @@ export default function EventExample() {
 
 ## API
 
-### RFlow
-**Important:** The RFlow height is controlled by it's parent element.
+### RFlowz
+**Important:** The RFlowz height is controlled by it's parent element.
 ```jsx
 <div style={{ width: '100%', height: '100vh' }}>
-  <RFlow nodes={nodes} />
+  <RFlowz nodes={nodes} />
 </div>
 ```
 #### props
@@ -177,7 +177,7 @@ Type: string
 - #### useNodeState
   ##### Usage
   ```js
-  import RFlow, { useNodeState } from 'rflow';
+  import RFlowz, { useNodeState } from 'rflowz';
 
   function Component() {
     const [nodes, setNodes] = useNodeState([]);
@@ -186,7 +186,7 @@ Type: string
   ```
   ##### Typescript
   ```ts
-  import RFlow, { useNodeState, Node } from 'rflow';
+  import RFlowz, { useNodeState, Node } from 'rflowz';
 
   function Component() {
     const [nodes, setNodes] = useNodeState<Node[]>([]);

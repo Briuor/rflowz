@@ -1,25 +1,25 @@
 import React, { useEffect, useRef } from 'react';
-import { useRFlowStore } from '../store';
+import { useRFlowzStore } from '../store';
 import Arrow from './Arrow';
 import styles from './styles.module.css';
-import { NodeID, NodeProps, RFlowState } from '../types';
+import { NodeID, NodeProps, RFlowzState } from '../types';
 
 export default function Node({ node, canvasRef }: NodeProps) {
   const nodeRef = useRef<HTMLDivElement>(null);
 
-  const setNodeMouseOffset = useRFlowStore(
-    (state: RFlowState) => state.setNodeMouseOffset
+  const setNodeMouseOffset = useRFlowzStore(
+    (state: RFlowzState) => state.setNodeMouseOffset
   );
-  const currentDraggingNode = useRFlowStore(
-    (state: RFlowState) => state.currentDraggingNode
+  const currentDraggingNode = useRFlowzStore(
+    (state: RFlowzState) => state.currentDraggingNode
   );
-  const setCurrentDraggingNode = useRFlowStore(
-    (state: RFlowState) => state.setCurrentDraggingNode
+  const setCurrentDraggingNode = useRFlowzStore(
+    (state: RFlowzState) => state.setCurrentDraggingNode
   );
-  const canvasProperties = useRFlowStore(
-    (state: RFlowState) => state.canvasProperties
+  const canvasProperties = useRFlowzStore(
+    (state: RFlowzState) => state.canvasProperties
   );
-  const updateNode = useRFlowStore((state: RFlowState) => state.updateNode);
+  const updateNode = useRFlowzStore((state: RFlowzState) => state.updateNode);
 
   // change cursor when dragging node
   useEffect(() => {

@@ -1,10 +1,10 @@
 {
-  "name": "rflow",
+  "name": "rflowz",
   "version": "0.0.1",
   "description": "Library for building flow chart and diagrams using React",
   "author": "Briuor",
   "license": "MIT",
-  "repository": "Briuor/rflow",
+  "repository": "Briuor/rflowz",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.ts",

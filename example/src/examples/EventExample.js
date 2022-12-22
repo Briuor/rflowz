@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import RFlow, { useNodeState } from 'rflow';
-import 'rflow/dist/index.css';
+import RFlowz, { useNodeState } from 'rflowz';
+import 'rflowz/dist/index.css';
 
 const StartNode = ({ data }) => (
   <div className='node'>
@@ -68,7 +68,7 @@ export default function EventExample() {
 
   return (
     <div style={{ width: '100%', height: '100vh' }}>
-      <RFlow nodes={nodes} />
+      <RFlowz nodes={nodes} />
     </div>
   );
 }

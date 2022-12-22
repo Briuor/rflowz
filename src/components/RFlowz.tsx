@@ -1,37 +1,37 @@
 import React, { useEffect, useRef } from 'react';
 import Node from './Node';
-import { useRFlowStore } from '../store';
+import { useRFlowzStore } from '../store';
 import styles from './styles.module.css';
 import {
   canvasProperties,
   Node as NodeType,
-  RFlowProps,
-  RFlowState
+  RFlowzProps,
+  RFlowzState
 } from '../types';
 
-export default function RFlow(props: RFlowProps) {
-  const nodes = useRFlowStore((state: RFlowState) => state.nodes);
-  const updateNode = useRFlowStore((state: RFlowState) => state.updateNode);
-  const hangingPos = useRFlowStore((state: RFlowState) => state.hangingPos);
-  const setHangingPos = useRFlowStore(
-    (state: RFlowState) => state.setHangingPos
+export default function RFlowz(props: RFlowzProps) {
+  const nodes = useRFlowzStore((state: RFlowzState) => state.nodes);
+  const updateNode = useRFlowzStore((state: RFlowzState) => state.updateNode);
+  const hangingPos = useRFlowzStore((state: RFlowzState) => state.hangingPos);
+  const setHangingPos = useRFlowzStore(
+    (state: RFlowzState) => state.setHangingPos
   );
-  const canvasProperties = useRFlowStore(
-    (state: RFlowState) => state.canvasProperties
+  const canvasProperties = useRFlowzStore(
+    (state: RFlowzState) => state.canvasProperties
   );
-  const setCanvasProperties = useRFlowStore(
-    (state: RFlowState) => state.setCanvasProperties
+  const setCanvasProperties = useRFlowzStore(
+    (state: RFlowzState) => state.setCanvasProperties
   );
-  const nodeMouseOffset = useRFlowStore(
-    (state: RFlowState) => state.nodeMouseOffset
+  const nodeMouseOffset = useRFlowzStore(
+    (state: RFlowzState) => state.nodeMouseOffset
   );
-  const currentDraggingNode = useRFlowStore(
-    (state: RFlowState) => state.currentDraggingNode
+  const currentDraggingNode = useRFlowzStore(
+    (state: RFlowzState) => state.currentDraggingNode
   );
-  const setCurrentDraggingNode = useRFlowStore(
-    (state: RFlowState) => state.setCurrentDraggingNode
+  const setCurrentDraggingNode = useRFlowzStore(
+    (state: RFlowzState) => state.setCurrentDraggingNode
   );
-  const setNodes = useRFlowStore((state: RFlowState) => state.setNodes);
+  const setNodes = useRFlowzStore((state: RFlowzState) => state.setNodes);
 
   const canvasRef = useRef<HTMLDivElement>(null);
 

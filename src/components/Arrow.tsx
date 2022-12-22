@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { useRFlowStore } from '../store';
+import { useRFlowzStore } from '../store';
 import styles from './styles.module.css';
-import { ArrowProps, RFlowState, Node } from '../types';
+import { ArrowProps, RFlowzState, Node } from '../types';
 
 export default function Arrow({ node, nextNodeId }: ArrowProps) {
-  const nodes = useRFlowStore((state: RFlowState) => state.nodes);
+  const nodes = useRFlowzStore((state: RFlowzState) => state.nodes);
 
   const [nextNode, setNextNode] = useState<Node | null>(null);
 

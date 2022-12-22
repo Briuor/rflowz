@@ -1,5 +1,5 @@
-import RFlow from './components/RFlow';
+import RFlowz from './components/RFlowz';
 
 export { useNodeState } from './hooks/useNodeState';
 export * from './types/index';
-export default RFlow;
+export default RFlowz;

@@ -1,10 +1,10 @@
-import { RFlowState } from './../types/rflow';
+import { RFlowzState } from '../types/rflowz';
 import { useEffect } from 'react';
-import { useRFlowStore } from '../store';
+import { useRFlowzStore } from '../store';
 import { Node } from '../types';
 
 export const useNodeState = (initialNodes: Node[]) => {
-  const [nodes, setNodes] = useRFlowStore((state: RFlowState) => [
+  const [nodes, setNodes] = useRFlowzStore((state: RFlowzState) => [
     state.nodes,
     state.setNodes
   ]);

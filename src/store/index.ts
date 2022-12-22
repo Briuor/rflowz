@@ -1,8 +1,8 @@
 import create from 'zustand';
 import produce from 'immer';
-import { RFlowState, Node } from '../types';
+import { RFlowzState, Node } from '../types';
 
-const useRFlowStore = create<RFlowState>((set, get) => ({
+const useRFlowzStore = create<RFlowzState>((set, get) => ({
   nodes: [],
   hangingPos: null,
   nodeMouseOffset: { x: 0, y: 0 },
@@ -13,7 +13,7 @@ const useRFlowStore = create<RFlowState>((set, get) => ({
 
     if (nodeIndex !== -1) {
       set(
-        produce((state: RFlowState) => {
+        produce((state: RFlowzState) => {
           state.nodes[nodeIndex] = { ...state.nodes[nodeIndex], ...data };
         })
       );
@@ -23,7 +23,7 @@ const useRFlowStore = create<RFlowState>((set, get) => ({
     if (Array.isArray(nodesOrCallback)) {
       set({ nodes: nodesOrCallback });
     } else if (typeof nodesOrCallback === 'function') {
-      set((state: RFlowState) => ({ nodes: nodesOrCallback(state.nodes) }));
+      set((state: RFlowzState) => ({ nodes: nodesOrCallback(state.nodes) }));
     } else {
       console.error('Wrong nodes type');
     }
@@ -34,4 +34,4 @@ const useRFlowStore = create<RFlowState>((set, get) => ({
   setCurrentDraggingNode: (item) => set({ currentDraggingNode: item })
 }));
 
-export { useRFlowStore };
+export { useRFlowzStore };
