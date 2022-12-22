@@ -29,6 +29,9 @@
     "react/jsx-handler-names": 0,
     "react/jsx-fragments": 0,
     "react/no-unused-prop-types": 0,
-    "import/export": 0
+    "no-use-before-define": 0,
+    "import/export": 0,
+    "@typescript-eslint/no-loss-of-precision": 0,
+    "@typescript-eslint/no-explicit-any": 0
   }
 }

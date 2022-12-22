@@ -7,6 +7,7 @@ const DefaultNode = ({ data }) => (
 )
 
 export default function SimpleExample() {
+  // eslint-disable-next-line no-unused-vars
   const [nodes, setNodes] = useNodeState([
     {
       id: '1',
