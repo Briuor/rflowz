@@ -1,10 +1,10 @@
 import { RFlowState } from './../types/rflow';
 import { useEffect } from 'react';
-import { useCanvasStore } from '../store';
+import { useRFlowStore } from '../store';
 import { Node } from '../types';
 
 export const useNodeState = (initialNodes: Node[]) => {
-  const [nodes, setNodes] = useCanvasStore((state: RFlowState) => [
+  const [nodes, setNodes] = useRFlowStore((state: RFlowState) => [
     state.nodes,
     state.setNodes
   ]);

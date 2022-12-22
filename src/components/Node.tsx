@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useCanvasStore } from '../store';
+import { useRFlowStore } from '../store';
 import Arrow from './Arrow';
 import styles from './styles.module.css';
 import { NodeID, NodeProps, RFlowState } from '../types';
@@ -7,19 +7,19 @@ import { NodeID, NodeProps, RFlowState } from '../types';
 export default function Node({ node, canvasRef }: NodeProps) {
   const nodeRef = useRef<HTMLDivElement>(null);
 
-  const setNodeMouseOffset = useCanvasStore(
+  const setNodeMouseOffset = useRFlowStore(
     (state: RFlowState) => state.setNodeMouseOffset
   );
-  const currentDraggingNode = useCanvasStore(
+  const currentDraggingNode = useRFlowStore(
     (state: RFlowState) => state.currentDraggingNode
   );
-  const setCurrentDraggingNode = useCanvasStore(
+  const setCurrentDraggingNode = useRFlowStore(
     (state: RFlowState) => state.setCurrentDraggingNode
   );
-  const canvasProperties = useCanvasStore(
+  const canvasProperties = useRFlowStore(
     (state: RFlowState) => state.canvasProperties
   );
-  const updateNode = useCanvasStore((state: RFlowState) => state.updateNode);
+  const updateNode = useRFlowStore((state: RFlowState) => state.updateNode);
 
   // change cursor when dragging node
   useEffect(() => {

@@ -2,7 +2,7 @@ import create from 'zustand';
 import produce from 'immer';
 import { RFlowState, Node } from '../types';
 
-const useCanvasStore = create<RFlowState>((set, get) => ({
+const useRFlowStore = create<RFlowState>((set, get) => ({
   nodes: [],
   hangingPos: null,
   nodeMouseOffset: { x: 0, y: 0 },
@@ -34,4 +34,4 @@ const useCanvasStore = create<RFlowState>((set, get) => ({
   setCurrentDraggingNode: (item) => set({ currentDraggingNode: item })
 }));
 
-export { useCanvasStore };
+export { useRFlowStore };

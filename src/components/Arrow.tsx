@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { useCanvasStore } from '../store';
+import { useRFlowStore } from '../store';
 import styles from './styles.module.css';
 import { ArrowProps, RFlowState, Node } from '../types';
 
 export default function Arrow({ node, nextNodeId }: ArrowProps) {
-  const nodes = useCanvasStore((state: RFlowState) => state.nodes);
+  const nodes = useRFlowStore((state: RFlowState) => state.nodes);
 
   const [nextNode, setNextNode] = useState<Node | null>(null);
 

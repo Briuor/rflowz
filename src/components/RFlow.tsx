@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import Node from './Node';
-import { useCanvasStore } from '../store';
+import { useRFlowStore } from '../store';
 import styles from './styles.module.css';
 import {
   canvasProperties,
@@ -10,28 +10,28 @@ import {
 } from '../types';
 
 export default function RFlow(props: RFlowProps) {
-  const nodes = useCanvasStore((state: RFlowState) => state.nodes);
-  const updateNode = useCanvasStore((state: RFlowState) => state.updateNode);
-  const hangingPos = useCanvasStore((state: RFlowState) => state.hangingPos);
-  const setHangingPos = useCanvasStore(
+  const nodes = useRFlowStore((state: RFlowState) => state.nodes);
+  const updateNode = useRFlowStore((state: RFlowState) => state.updateNode);
+  const hangingPos = useRFlowStore((state: RFlowState) => state.hangingPos);
+  const setHangingPos = useRFlowStore(
     (state: RFlowState) => state.setHangingPos
   );
-  const canvasProperties = useCanvasStore(
+  const canvasProperties = useRFlowStore(
     (state: RFlowState) => state.canvasProperties
   );
-  const setCanvasProperties = useCanvasStore(
+  const setCanvasProperties = useRFlowStore(
     (state: RFlowState) => state.setCanvasProperties
   );
-  const nodeMouseOffset = useCanvasStore(
+  const nodeMouseOffset = useRFlowStore(
     (state: RFlowState) => state.nodeMouseOffset
   );
-  const currentDraggingNode = useCanvasStore(
+  const currentDraggingNode = useRFlowStore(
     (state: RFlowState) => state.currentDraggingNode
   );
-  const setCurrentDraggingNode = useCanvasStore(
+  const setCurrentDraggingNode = useRFlowStore(
     (state: RFlowState) => state.setCurrentDraggingNode
   );
-  const setNodes = useCanvasStore((state: RFlowState) => state.setNodes);
+  const setNodes = useRFlowStore((state: RFlowState) => state.setNodes);
 
   const canvasRef = useRef<HTMLDivElement>(null);
 
