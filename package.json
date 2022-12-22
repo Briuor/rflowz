@@ -1,7 +1,7 @@
 {
   "name": "rflow",
   "version": "0.0.1",
-  "description": "High customizable flow library for React",
+  "description": "Library for building flow chart and diagrams using React",
   "author": "Briuor",
   "license": "MIT",
   "repository": "Briuor/rflow",

@@ -1,40 +1,47 @@
-import React, { useEffect } from 'react'
-import RFlow, { useNodeState } from 'rflow'
-import 'rflow/dist/index.css'
+import React, { useEffect } from 'react';
+import RFlow, { useNodeState } from 'rflow';
+import 'rflow/dist/index.css';
 
 const StartNode = ({ data }) => (
   <div className='node'>
     Generate a random value
-    <div onClick={data.generateRandomValue} className='random-btn' role="button">
+    <div
+      onClick={data.generateRandomValue}
+      className='random-btn'
+      role='button'
+    >
       Click Me
     </div>
   </div>
-)
+);
 
-const ResultNode = ({ data }) => <div className='node'>Result: {data.randomValue}</div>
+const ResultNode = ({ data }) => (
+  <div className='node'>Result: {data.randomValue}</div>
+);
 
 export default function EventExample() {
-  const [nodes, setNodes] = useNodeState([])
+  const [nodes, setNodes] = useNodeState([]);
 
   useEffect(() => {
     const generateRandomValue = (e) => {
-      setNodes((nds) => nds.map((node) => {
-          if(node.id === 'result') {
-            const newNode = { 
-              ...node, 
-              data: { 
-                ...node.data, 
+      setNodes((nds) =>
+        nds.map((node) => {
+          if (node.id === 'result') {
+            const newNode = {
+              ...node,
+              data: {
+                ...node.data,
                 randomValue: Math.round(Math.random() * 999) + 1
               }
-            }
-            return newNode
+            };
+            return newNode;
           }
-          
-          return node
+
+          return node;
         })
-      )
-    }
-    
+      );
+    };
+
     setNodes([
       {
         id: 'start',
@@ -55,13 +62,13 @@ export default function EventExample() {
           randomValue: 1
         },
         nextNodeIds: []
-      },
-    ])
-  }, [setNodes])
+      }
+    ]);
+  }, [setNodes]);
 
   return (
     <div style={{ width: '100%', height: '100vh' }}>
       <RFlow nodes={nodes} />
     </div>
-  )
+  );
 }
