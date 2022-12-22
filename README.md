@@ -13,7 +13,7 @@ npm install rflow
 ## Usage
 ### Basic Usage
 <p align="center"> 
-  <img style="border-radius: 5px" src="https://raw.githubusercontent.com/Briuor/rflow/master/media/demo-rflow.gif">
+  <img style="border-radius: 5px" src="https://github.com/Briuor/rflow/blob/master/media/demo-rflow.gif?raw=true">
 </p>
 
 ```jsx
@@ -52,7 +52,7 @@ export default function App() {
 ```
 ### Passing Events to Node Component
 <p align="center"> 
-  <img style="border-radius: 5px" src="https://raw.githubusercontent.com/Briuor/rflow/master/media/demo-event-rflow.gif">
+  <img style="border-radius: 5px" src="https://github.com/Briuor/rflow/blob/master/media/demo-event-rflow.gif?raw=true">
 </p>
 
 ```jsx
